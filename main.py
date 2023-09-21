@@ -14,3 +14,9 @@ soup = BeautifulSoup(response, "lxml")
 titles = soup.find_all("h2", class_="jobTitle")
 for title in titles:
     print(title.text)
+
+print()
+#find company name
+company_names = soup.find_all("span", class_="companyName")
+for name in company_names:
+    print(name.text)

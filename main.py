@@ -27,18 +27,17 @@ def find_job(soup):
     num_job = len(soup.find_all("div", class_="cardOutline"))
     print(num_job)
     job_box = soup.find_all("div", class_="cardOutline")
-    for job in num_job:
-        company_names = soup.find("span", class_="companyName")
-        company_locations = soup.find("div", class_="companyLocation")
-        estimate_salaries = soup.find("span", class_="estimated-salary")
-        attribute_snippets = soup.find("div", class_="attribute_snippet")
-        description_snippets = soup.find("div", class_="job-snippet")
-        job_dates = soup.find("span", class_="date")
-        job_links = soup.find("h2", class_="jobTitle")
-        link_div = a.find("a")
+    for job in job_box:
+        company_names = job.find("span", class_="companyName")
+        company_locations = job.find("div", class_="companyLocation")
+        estimate_salaries = job.find("span", class_="estimated-salary")
+        attribute_snippets = job.find("div", class_="attribute_snippet")
+        description_snippets = job.find("div", class_="job-snippet")
+        job_dates = job.find("span", class_="date")
+        job_div = job.find("h2", class_="jobTitle")
+        link_div = job_div.find("a")
         pre_end_link = link_div.get("href")
         end_link = pre_end_link[7:]
-        print(end_link)
         link_head = "https://www.indeed.com/viewjob"
         link = link_head + end_link
         job_result = {

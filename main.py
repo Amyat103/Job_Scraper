@@ -44,10 +44,10 @@ print()
 #find attribute snippet
 attribute_snippets = soup.find_all("div", class_="attribute_snippet")
 for attribute in attribute_snippets:
-    print(snippet.text)
+    print(attribute.text)
 
 print()
 #find description
 description_snippets = soup.find_all("div", class_="job-snippet")
 for description in description_snippets:
-    print(description.text)
+    print(description.text.strip())

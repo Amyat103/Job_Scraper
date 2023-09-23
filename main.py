@@ -26,14 +26,20 @@ print()
 def find_job(soup):
     num_job = len(soup.find_all("div", class_="cardOutline"))
     print(num_job)
-    job_box = soup.find_all("div", class_="cardOutline")
-    for job in job_box:
-        company_names = job.find("span", class_="companyName")
-        company_locations = job.find("div", class_="companyLocation")
-        estimate_salaries = job.find("span", class_="estimated-salary")
-        attribute_snippets = job.find("div", class_="attribute_snippet")
-        description_snippets = job.find("div", class_="job-snippet")
-        job_dates = job.find("span", class_="date")
+    job_boxes = soup.find_all("div", class_="cardOutline")
+    for job in job_boxes:
+        company_names = job.find("span", class_="companyName").text
+        company_locations = job.find("div", class_="companyLocation").text
+        try:
+            estimate_salaries = job.find("span", class_="estimated-salary").text
+        except:
+            estimate_salaries = "None"
+        try:
+            attribute_snippets = job.find("div", class_="attribute_snippet").text
+        except:
+            attribute_snippets = "None"
+        description_snippets = job.find("div", class_="job-snippet").text
+        job_dates = job.find("span", class_="date").text
         job_div = job.find("h2", class_="jobTitle")
         link_div = job_div.find("a")
         pre_end_link = link_div.get("href")
@@ -41,14 +47,18 @@ def find_job(soup):
         link_head = "https://www.indeed.com/viewjob"
         link = link_head + end_link
         job_result = {
-            "Company Name": company_names.text,
-            "Job Location": company_locations.text,
-            "Estimated Salary": estimate_salaries.text,
-            "Attribute Snippet": attribute_snippets.text,
-            "Description Snippet": description_snippets.text,
-            "Date Posted": job_dates.text,
+            "Company Name": company_names,
+            "Job Location": company_locations,
+            "Estimated Salary": estimate_salaries,
+            "Attribute Snippet": attribute_snippets,
+            "Description Snippet": description_snippets,
+            "Date Posted": job_dates,
             "Indeed Link": link
         }
+        print(company_names)
+        print(estimate_salaries)
+        print(attribute_snippets)
+        print()
         print(job_result)
 
 #find company name

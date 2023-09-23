@@ -2,10 +2,10 @@ import requests
 import key
 from bs4 import BeautifulSoup
 
-# TODO: finish adding snippet, discription, date posted, and link
 # TODO: Pair all the info to each company
 # TODO: Put them into excel
 # TODO: Put everything in functions
+# TODO: Make it search multiple pages
 
 
 #requests
@@ -22,6 +22,35 @@ for title in titles:
     print(title.text)
 
 print()
+
+def find_job(soup):
+    num_job = len(soup.find_all("div", class_="cardOutline"))
+    print(num_job)
+    job_box = soup.find_all("div", class_="cardOutline")
+    for job in num_job:
+        company_names = soup.find("span", class_="companyName")
+        company_locations = soup.find("div", class_="companyLocation")
+        estimate_salaries = soup.find("span", class_="estimated-salary")
+        attribute_snippets = soup.find("div", class_="attribute_snippet")
+        description_snippets = soup.find("div", class_="job-snippet")
+        job_dates = soup.find("span", class_="date")
+        job_links = soup.find("h2", class_="jobTitle")
+        link_div = a.find("a")
+        pre_end_link = link_div.get("href")
+        end_link = pre_end_link[7:]
+        print(end_link)
+        link_head = "https://www.indeed.com/viewjob"
+        link = link_head + end_link
+        job_result = {
+            "Company Name": company_names,
+            "Job Location": company_locations,
+            "Estimated Salary": estimate_salaries,
+            "Attribute Snippet": attribute_snippets,
+            "Description Snippet": description_snippets,
+            "Date Posted": job_dates,
+            "Indeed Link": link
+        }
+        print(job_result)
 
 #find company name
 company_names = soup.find_all("span", class_="companyName")
@@ -69,3 +98,5 @@ for a in job_links:
     link_head = "https://www.indeed.com/viewjob"
     link = link_head + end_link
     print(link)
+
+find_job(soup)

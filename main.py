@@ -3,7 +3,6 @@ import key
 from bs4 import BeautifulSoup
 import pprint
 
-# TODO: Pair all the info to each company
 # TODO: Put them into excel
 # TODO: Put everything in functions
 # TODO: Make it search multiple pages

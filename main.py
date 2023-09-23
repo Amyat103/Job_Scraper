@@ -51,3 +51,21 @@ print()
 description_snippets = soup.find_all("div", class_="job-snippet")
 for description in description_snippets:
     print(description.text.strip())
+
+print()
+#date posted
+job_dates = soup.find_all("span", class_="date")
+for date in job_dates:
+    print(date.text)
+
+print()
+#link
+job_links = soup.find_all("h2", class_="jobTitle")
+for a in job_links:
+    link_div = a.find("a")
+    pre_end_link = link_div.get("href")
+    end_link = pre_end_link[7:]
+    print(end_link)
+    link_head = "https://www.indeed.com/viewjob"
+    link = link_head + end_link
+    print(link)

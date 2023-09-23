@@ -1,6 +1,7 @@
 import requests
 import key
 from bs4 import BeautifulSoup
+import pprint
 
 # TODO: Pair all the info to each company
 # TODO: Put them into excel
@@ -109,4 +110,4 @@ for a in job_links:
     print(link)
 
 job_result = find_job(soup)
-print(job_result)
+pprint.pprint(job_result, sort_dicts=False)

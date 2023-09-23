@@ -41,12 +41,12 @@ def find_job(soup):
         link_head = "https://www.indeed.com/viewjob"
         link = link_head + end_link
         job_result = {
-            "Company Name": company_names,
-            "Job Location": company_locations,
-            "Estimated Salary": estimate_salaries,
-            "Attribute Snippet": attribute_snippets,
-            "Description Snippet": description_snippets,
-            "Date Posted": job_dates,
+            "Company Name": company_names.text,
+            "Job Location": company_locations.text,
+            "Estimated Salary": estimate_salaries.text,
+            "Attribute Snippet": attribute_snippets.text,
+            "Description Snippet": description_snippets.text,
+            "Date Posted": job_dates.text,
             "Indeed Link": link
         }
         print(job_result)

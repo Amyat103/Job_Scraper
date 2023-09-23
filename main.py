@@ -27,6 +27,7 @@ def find_job(soup):
     num_job = len(soup.find_all("div", class_="cardOutline"))
     print(num_job)
     job_boxes = soup.find_all("div", class_="cardOutline")
+    result = []
     for job in job_boxes:
         company_names = job.find("span", class_="companyName").text
         company_locations = job.find("div", class_="companyLocation").text
@@ -38,7 +39,7 @@ def find_job(soup):
             attribute_snippets = job.find("div", class_="attribute_snippet").text
         except:
             attribute_snippets = "None"
-        description_snippets = job.find("div", class_="job-snippet").text
+        description_snippets = job.find("div", class_="job-snippet").text.strip()
         job_dates = job.find("span", class_="date").text
         job_div = job.find("h2", class_="jobTitle")
         link_div = job_div.find("a")
@@ -46,7 +47,7 @@ def find_job(soup):
         end_link = pre_end_link[7:]
         link_head = "https://www.indeed.com/viewjob"
         link = link_head + end_link
-        job_result = {
+        result_sin = {
             "Company Name": company_names,
             "Job Location": company_locations,
             "Estimated Salary": estimate_salaries,
@@ -55,11 +56,10 @@ def find_job(soup):
             "Date Posted": job_dates,
             "Indeed Link": link
         }
-        print(company_names)
-        print(estimate_salaries)
-        print(attribute_snippets)
-        print()
-        print(job_result)
+        result.append(result_sin)
+
+    return result
+
 
 #find company name
 company_names = soup.find_all("span", class_="companyName")
@@ -108,4 +108,5 @@ for a in job_links:
     link = link_head + end_link
     print(link)
 
-find_job(soup)
+job_result = find_job(soup)
+print(job_result)

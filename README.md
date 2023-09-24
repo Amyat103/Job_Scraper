@@ -1,1 +1,1 @@
-This program scrape indeed.com for jobs based on the input
+This program scrape indeed.com for jobs based on the input. Then export the results to an Excel Sheets.

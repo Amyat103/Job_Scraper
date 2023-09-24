@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import pprint
 import pandas as pd
 
+
 def find_job(soup):
     num_job = len(soup.find_all("div", class_="cardOutline"))
     print(num_job)
@@ -43,6 +44,7 @@ def find_job(soup):
 
     return result
 
+
 def request(page, location, job_type):
     link = f"https://api.scrapingant.com/v2/general?url=https%3A%2F%2Fwww.indeed.com%2Fjobs%3Fq%3D{job_type}%26l%3D{location}%26start%3D{page}%26pp%3DgQAPAAABimfNo-sAAAACESYLbQAcAQEBCBbB6hjtFyr5Z2-Pg3aki9oX2Kf9o1NJ-AAA%26vjk%3D66192889ae4b5af1&x-api-key={key.API_KEY}"
     r = requests.get(link, timeout=120)
@@ -50,6 +52,7 @@ def request(page, location, job_type):
     response = r.content
     soup = BeautifulSoup(response, "lxml")
     return soup
+
 
 def main():
     # final list
@@ -65,10 +68,12 @@ def main():
     pprint.pprint(job_result, sort_dicts=False)
     return job_result
 
+
 def to_excel(job_result):
     df = pd.DataFrame(job_result)
     df.to_excel("result.xlsx", index=False)
     print(df)
+
 
 if __name__ == "__main__":
     main()

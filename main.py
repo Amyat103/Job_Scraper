@@ -1,7 +1,6 @@
 import requests
 import key
 from bs4 import BeautifulSoup
-import pprint
 import pandas as pd
 
 

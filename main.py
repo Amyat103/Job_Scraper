@@ -2,6 +2,7 @@ import requests
 import key
 from bs4 import BeautifulSoup
 import pprint
+import pandas as pd
 
 # TODO: Put them into excel
 # TODO: Put everything in functions
@@ -65,6 +66,10 @@ def find_job(soup):
 
 job_result = find_job(soup)
 pprint.pprint(job_result, sort_dicts=False)
+
+data_frame = pd.DataFrame(job_result)
+
+print(data_frame)
 
 # #find company name
 # company_names = soup.find_all("span", class_="companyName")

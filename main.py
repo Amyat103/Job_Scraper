@@ -46,22 +46,27 @@ def find_job(soup):
 
     return result
 
+def request(page):
+    link = f"https://api.scrapingant.com/v2/general?url=https%3A%2F%2Fwww.indeed.com%2Fjobs%3Fq%3D{job_type}%26l%3D{location}%26start%3D{page}%26pp%3DgQAPAAABimfNo-sAAAACESYLbQAcAQEBCBbB6hjtFyr5Z2-Pg3aki9oX2Kf9o1NJ-AAA%26vjk%3D66192889ae4b5af1&x-api-key={key.API_KEY}"
+    r = requests.get(link, timeout=120)
+    print(r.status_code)
+    response = r.content
+    soup = BeautifulSoup(response, "lxml")
+    return soup
+
 #final list
 job_result = []
 
+job_type = "Python Internship"
+location = "Seattle WA"
+
 for page in range(0, 50, 10):
-    job_type = "Python Internship"
-    location = "Seattle WA"
-    link = f"https://api.scrapingant.com/v2/general?url=https%3A%2F%2Fwww.indeed.com%2Fjobs%3Fq%3D{job_type}%26l%3D{location}%26start%3D{page}%26pp%3DgQAPAAABimfNo-sAAAACESYLbQAcAQEBCBbB6hjtFyr5Z2-Pg3aki9oX2Kf9o1NJ-AAA%26vjk%3D66192889ae4b5af1&x-api-key={key.API_KEY}"
-    r = requests.get(link, timeout=60)
-    print(r.status_code)  # keep till after changing link
-    response = r.content
-    # parse
-    soup = BeautifulSoup(response, "lxml")
+    soup = request(page)
     page_result = find_job(soup)
-    job_result.append(page_result)
+    job_result.extend(page_result)
     print(page_result)
-    print("")
+    print("Scraping")
+
 
 
 pprint.pprint(job_result, sort_dicts=False)
